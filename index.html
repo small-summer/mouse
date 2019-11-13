@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>打地鼠小游戏</title>
+		<style>
+			*{margin: 0;padding: 0;}
+			.box{
+				width: 300px;
+				height: 600px;
+				margin: 0px auto;
+			}
+			.box marquee{
+				width: 330px;
+				height: 40px;
+				line-height: 40px;
+			}
+			.main{width: 330px;
+				height: 330px;
+				margin: 0px auto;
+				background: url(img/5.jpg) no-repeat;
+				background-size:cover ;
+				margin-top: 30px;
+			}
+			.main img{
+				width: 100px;
+				height: 100px;
+			}
+			.score{
+				width: 100px;
+				height: 60px;
+				text-align: center;
+				line-height: 60px;
+				background-color: orange;
+				margin: 30px auto;
+			}
+			.btn{
+				width: 100px;
+				height: 100px;
+				text-align: center;
+				line-height: 100px;
+				color: red;
+				font-size: 50px;
+				margin: 0px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="title">
+				<marquee behavior="scroll" direction="right" bgcolor="antiquewhite">打地鼠</marquee>
+			</div>
+			<div class="main">
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+				<img src="img/5.jpg" onclick="beat(this)" alt="" />
+			</div>
+			<div class="score">得分：0分</div>
+			<div class="btn" onclick="start(this)">Start</div>
+		</div>
+		<script>
+			var lastIndex=0;
+			function start(obj){	
+				setInterval(function(){
+					var omain=document.getElementsByClassName("main")[0];
+					var oPic=omain.children;
+					var index=Math.round(Math.random()*8);
+					oPic[index].src="img/2.gif";
+					//alert(Math.round(Math.random()*8));
+					if(lastIndex!=index){
+						oPic[lastIndex].src="img/5.jpg";
+					}			
+					lastIndex=index;
+				},1000)
+			}
+			var score=0;
+			//打老鼠：
+			function beat(obj){
+				console.log(obj.src);
+				var osrc=obj.src;
+				console.log(osrc.charAt(osrc.length-5));
+				var picName=osrc.charAt(osrc.length-5);
+				if(picName=='2'){
+					//点击的是小老鼠，得分
+					score++;
+					document.getElementsByClassName('score')[0].innerHTML="得分："+score+"分";
+				}
+			}
+		</script>
+	</body>
+</html>
